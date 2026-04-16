@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BarberShop — Corte de Respeito</title>
+<link rel="stylesheet" href="style.css">
+<script src="javascript.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@700;900&family=Oswald:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body data-theme="premium">
+
+<!-- ══ THEME SWITCHER ══ -->
+<div class="theme-panel">
+  <div class="theme-label">Tema</div>
+  <button class="theme-btn active" data-t="premium" title="Conveniência"></button>
+  <button class="theme-btn"        data-t="urbana"  title="Urbana"></button>
+  <button class="theme-btn"        data-t="minimal" title="Minimalista"></button>
+</div>
+
+<!-- ══ MODAL DE SERVIÇO ══ -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-box">
+    <div class="modal-foto" id="modalFoto">
+      <div class="modal-foto-icon" id="modalIcon">✂</div>
+      <div class="modal-foto-hint">substitua por foto real</div>
+      <div class="modal-foto-bar"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-esp" id="modalEsp">✦ Serviço</div>
+      <div class="modal-nome" id="modalNome">Nome do Serviço</div>
+      <div class="modal-desc" id="modalDesc">Descrição completa do serviço aparece aqui.</div>
+      <div class="modal-preco-row">
+        <span class="modal-preco-label">A partir de</span>
+        <span class="modal-preco-val" id="modalPreco">R$ 00</span>
+        <span class="modal-tempo" id="modalTempo">⏱ ~30 min</span>
+      </div>
+      <div class="modal-actions">
+        <a id="modalWppLink" href="#" target="_blank" style="flex:1">
+          <button class="modal-btn-wpp" style="width:100%">💬 Agendar pelo WhatsApp</button>
+        </a>
+        <button class="modal-btn-fechar" onclick="fecharModal()">✕ Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav>
+  <div class="nav-logo">Barber<span>CO</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#contato">Localização</a></li>
+  </ul>
+  <div style="display:flex;gap:14px;align-items:center">
+    <a href="https://wa.me/5551999999999?text=Olá!%20Quero%20agendar%20um%20horário." target="_blank">
+      <button class="btn-agendar">✂ Agendar</button>
+    </a>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-split">
+
+    <!-- Texto -->
+    <div class="hero-text">
+      <h1 class="hero-title">
+        O corte certo<br><span class="accent">muda tudo</span>
+      </h1>
+      <p class="hero-sub">
+        Profissionais que entendem seu estilo. Ambiente premium, atendimento rápido e resultado que fala por você.
+      </p>
+      <div class="hero-actions">
+        <a href="https://wa.me/5551999999999?text=Olá!%20Quero%20agendar%20um%20horário." target="_blank">
+          <button class="btn-agendar" style="font-size:14px;padding:13px 28px">  Agendar — WhatsApp</button>
+        </a>
+        <a href="#servicos"><button class="btn-outline">Ver Serviços</button></a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">800+</div>
+          <div class="stat-label">Clientes / mês</div>
+        </div>
+        <div>
+          <div class="stat-num">9</div>
+          <div class="stat-label">Anos de exp.</div>
+        </div>
+        <div>
+          <div class="stat-num">4.9★</div>
+          <div class="stat-label">Google</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Foto -->
+    <div class="hero-photo">
+      <div class="hero-photo-frame">
+        <!--
+          SUBSTITUIR FOTO REAL:
+          Troque o bloco abaixo por:
+          <img src="foto-barbearia.jpg" alt="Barbearia" style="width:100%;height:100%;object-fit:cover">
+        -->
+        <div class="hero-photo-placeholder">
+          <div class="hero-photo-icon">💈</div>
+          <div class="hero-photo-hint">Insira a foto aqui</div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <strong>4.9★</strong>
+        Avaliação Google
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SERVIÇOS ══ -->
+<section id="servicos">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">✦ O que oferecemos</div>
+      <h2 class="section-title">Serviços & Valores</h2>
+      <div class="section-line"></div>
+      <p style="margin-top:14px;font-size:13px;color:var(--text2);font-family:var(--tag-font);letter-spacing:1px">
+        Clique em qualquer serviço para ver detalhes
+      </p>
+    </div>
+
+    <div class="servicos-grid reveal">
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Corte Máquina"
+        data-esp="Corte"
+        data-desc="Degradê, baixinho ou pente — feito com precisão milimétrica. Ideal para quem busca um visual limpo e moderno no dia a dia."
+        data-preco="R$ 35"
+        data-tempo="~30 min"
+        data-icon="✂">
+        <div>
+          <div class="servico-nome">Corte Máquina</div>
+          <div class="servico-desc">Degradê, baixinho, pente</div>
+        </div>
+        <div class="servico-preco">R$ 35</div>
+      </div>
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Corte Tesoura"
+        data-esp="Corte"
+        data-desc="Técnica clássica com tesoura para cortes sociais, arredondados ou estilizados. Perfeito para cabelos mais longos ou quem prefere um acabamento mais natural."
+        data-preco="R$ 45"
+        data-tempo="~40 min"
+        data-icon="✂">
+        <div>
+          <div class="servico-nome">Corte Tesoura</div>
+          <div class="servico-desc">Clássico, social, arredondado</div>
+        </div>
+        <div class="servico-preco">R$ 45</div>
+      </div>
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Corte + Barba"
+        data-esp="Combo"
+        data-desc="O combo mais completo da casa. Corte no estilo que preferir mais barba feita com navalha, toalha quente e óleo de tratamento. Saída garantida."
+        data-preco="R$ 70"
+        data-tempo="~60 min"
+        data-icon="💈">
+        <div>
+          <div class="servico-nome">Corte + Barba</div>
+          <div class="servico-desc">Combo completo com toalha quente</div>
+        </div>
+        <div class="servico-preco">R$ 70</div>
+      </div>
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Barba Completa"
+        data-esp="Barba"
+        data-desc="Navalha afiada, toalha quente para abrir os poros e óleo finalizador. Resultado impecável e duradouro."
+        data-preco="R$ 40"
+        data-tempo="~30 min"
+        data-icon="🪒">
+        <div>
+          <div class="servico-nome">Barba Completa</div>
+          <div class="servico-desc">Navalha, toalha quente, óleo</div>
+        </div>
+        <div class="servico-preco">R$ 40</div>
+      </div>
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Sobrancelha"
+        data-esp="Acabamento"
+        data-desc="Aparado e delineado para um acabamento mais sofisticado. Detalhe que faz diferença no resultado final."
+        data-preco="R$ 15"
+        data-tempo="~10 min"
+        data-icon="✦">
+        <div>
+          <div class="servico-nome">Sobrancelha</div>
+          <div class="servico-desc">Aparado e delineado</div>
+        </div>
+        <div class="servico-preco">R$ 15</div>
+      </div>
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Pigmentação"
+        data-esp="Tratamento"
+        data-desc="Cobertura de falhas na barba ou cabelo com pigmento de alta fixação. Resultado natural e duradouro, ideal para quem quer densidade visual."
+        data-preco="R$ 60"
+        data-tempo="~45 min"
+        data-icon="🎨">
+        <div>
+          <div class="servico-nome">Pigmentação</div>
+          <div class="servico-desc">Cobertura de falhas na barba/cabelo</div>
+        </div>
+        <div class="servico-preco">R$ 60</div>
+      </div>
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Relaxamento"
+        data-esp="Química"
+        data-desc="Progressiva masculina para afinar e alinhar fios. Resultado liso e controlado por até 3 meses dependendo do tipo de cabelo."
+        data-preco="R$ 90"
+        data-tempo="~90 min"
+        data-icon="💫">
+        <div>
+          <div class="servico-nome">Relaxamento</div>
+          <div class="servico-desc">Progressiva masculina</div>
+        </div>
+        <div class="servico-preco">R$ 90</div>
+      </div>
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Hidratação"
+        data-esp="Tratamento Capilar"
+        data-desc="Tratamento capilar masculino com máscara nutritiva. Combate ressecamento, frizz e quebra. Cabelo mais saudável e com brilho."
+        data-preco="R$ 50"
+        data-tempo="~50 min"
+        data-icon="💧">
+        <div>
+          <div class="servico-nome">Hidratação</div>
+          <div class="servico-desc">Tratamento capilar masculino</div>
+        </div>
+        <div class="servico-preco">R$ 50</div>
+      </div>
+
+      <div class="servico-item" onclick="abrirModal(this)"
+        data-nome="Luzes / Mechas"
+        data-esp="Coloração"
+        data-desc="Californianas, reflexo ou tingimento completo. Técnica profissional para quem quer um visual diferenciado com cor e movimento."
+        data-preco="R$ 120"
+        data-tempo="~120 min"
+        data-icon="⚡">
+        <div>
+          <div class="servico-nome">Luzes / Mechas</div>
+          <div class="servico-desc">Californianas, reflexo, tingimento</div>
+        </div>
+        <div class="servico-preco">R$ 120</div>
+      </div>
+
+    </div>
+    <p style="text-align:center;margin-top:18px;font-size:11px;color:var(--text2);font-family:var(--tag-font);letter-spacing:1px;">* PREÇOS SUJEITOS A ALTERAÇÃO · CONSULTE NA UNIDADE</p>
+  </div>
+</section>
+
+<!-- ══ EQUIPE ══ -->
+<section id="equipe">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">✦ Nossos profissionais</div>
+      <h2 class="section-title">Conheça os Barbeiros</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="equipe-grid">
+      <div class="barbeiro-card reveal">
+        <div class="barbeiro-foto">
+          <div class="barbeiro-foto-placeholder">
+            <div class="barbeiro-avatar">✂</div>
+          </div>
+          <div class="barbeiro-overlay"></div>
+        </div>
+        <div class="barbeiro-info">
+          <div class="barbeiro-nome">Rafael Costa</div>
+          <div class="barbeiro-esp">✦ Especialista em Degradê</div>
+          <div class="barbeiro-tags">
+            <span class="tag">Fade</span>
+            <span class="tag">Skin</span>
+            <span class="tag">High Top</span>
+          </div>
+        </div>
+      </div>
+      <div class="barbeiro-card reveal">
+        <div class="barbeiro-foto">
+          <div class="barbeiro-foto-placeholder">
+            <div class="barbeiro-avatar">✂</div>
+          </div>
+          <div class="barbeiro-overlay"></div>
+        </div>
+        <div class="barbeiro-info">
+          <div class="barbeiro-nome">Lucas Mendes</div>
+          <div class="barbeiro-esp">✦ Mestre em Barba</div>
+          <div class="barbeiro-tags">
+            <span class="tag">Navalha</span>
+            <span class="tag">Pigmentação</span>
+            <span class="tag">Beard Design</span>
+          </div>
+        </div>
+      </div>
+      <div class="barbeiro-card reveal">
+        <div class="barbeiro-foto">
+          <div class="barbeiro-foto-placeholder">
+            <div class="barbeiro-avatar">✂</div>
+          </div>
+          <div class="barbeiro-overlay"></div>
+        </div>
+        <div class="barbeiro-info">
+          <div class="barbeiro-nome">Thiago Alves</div>
+          <div class="barbeiro-esp">✦ Corte Clássico & Tesoura</div>
+          <div class="barbeiro-tags">
+            <span class="tag">Social</span>
+            <span class="tag">Luzes</span>
+            <span class="tag">Relaxamento</span>
+          </div>
+        </div>
+      </div>
+      <div class="barbeiro-card reveal">
+        <div class="barbeiro-foto">
+          <div class="barbeiro-foto-placeholder">
+            <div class="barbeiro-avatar">✂</div>
+          </div>
+          <div class="barbeiro-overlay"></div>
+        </div>
+        <div class="barbeiro-info">
+          <div class="barbeiro-nome">Bruno Ferreira</div>
+          <div class="barbeiro-esp">✦ Especialista em Cabelo Crespo</div>
+          <div class="barbeiro-tags">
+            <span class="tag">Twist</span>
+            <span class="tag">Black</span>
+            <span class="tag">Afro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALERIA ══ -->
+<section id="galeria">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">✦ Nosso trabalho</div>
+      <h2 class="section-title">Galeria</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="galeria-grid reveal">
+      <div class="galeria-item">
+        <div class="galeria-placeholder">
+          <div class="galeria-icon">📸</div>
+          <div class="galeria-caption">Foto destaque</div>
+        </div>
+        <div class="galeria-hover-overlay"><span class="galeria-hover-text">Corte do Mês</span></div>
+      </div>
+      <div class="galeria-item">
+        <div class="galeria-placeholder">
+          <div class="galeria-icon">✂</div>
+          <div class="galeria-caption">Fade + Barba</div>
+        </div>
+        <div class="galeria-hover-overlay"><span class="galeria-hover-text">Combo Completo</span></div>
+      </div>
+      <div class="galeria-item">
+        <div class="galeria-placeholder">
+          <div class="galeria-icon">💈</div>
+          <div class="galeria-caption">Ambiente</div>
+        </div>
+        <div class="galeria-hover-overlay"><span class="galeria-hover-text">Nossa Barbearia</span></div>
+      </div>
+      <div class="galeria-item">
+        <div class="galeria-placeholder">
+          <div class="galeria-icon">✂</div>
+          <div class="galeria-caption">Social Clássico</div>
+        </div>
+        <div class="galeria-hover-overlay"><span class="galeria-hover-text">Degradê</span></div>
+      </div>
+      <div class="galeria-item">
+        <div class="galeria-placeholder">
+          <div class="galeria-icon">🪒</div>
+          <div class="galeria-caption">Barba Navalha</div>
+        </div>
+        <div class="galeria-hover-overlay"><span class="galeria-hover-text">Navalha</span></div>
+      </div>
+    </div>
+    <div class="galeria-carousel">
+      <div class="galeria-item"><div class="galeria-placeholder"><div class="galeria-icon">📸</div><div class="galeria-caption">Corte do Mês</div></div></div>
+      <div class="galeria-item"><div class="galeria-placeholder"><div class="galeria-icon">✂</div><div class="galeria-caption">Fade + Barba</div></div></div>
+      <div class="galeria-item"><div class="galeria-placeholder"><div class="galeria-icon">💈</div><div class="galeria-caption">Ambiente</div></div></div>
+      <div class="galeria-item"><div class="galeria-placeholder"><div class="galeria-icon">✂</div><div class="galeria-caption">Social</div></div></div>
+      <div class="galeria-item"><div class="galeria-placeholder"><div class="galeria-icon">🪒</div><div class="galeria-caption">Navalha</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTATO ══ -->
+<section id="contato">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">✦ Nos encontre</div>
+      <h2 class="section-title">Localização & Contato</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contato-inner reveal">
+      <div class="contato-info">
+        <div class="info-block">
+          <div class="info-label">📍 Endereço</div>
+          <div class="info-value">Rua Exemplo, 123 — Bairro Centro<br>Porto Alegre, RS · CEP 00000-000</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">📞 Contato</div>
+          <div class="info-value">
+            <a href="https://wa.me/5551999999999" style="color:var(--accent)">(51) 9 9999-9999</a><br>
+            contato@barberco.com.br
+          </div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">⏰ Horários de Funcionamento</div>
+          <div class="horarios-grid">
+            <div class="horario-row"><span class="horario-dia">Segunda</span><span class="horario-aberto">09h–19h</span></div>
+            <div class="horario-row"><span class="horario-dia">Terça</span><span class="horario-aberto">09h–19h</span></div>
+            <div class="horario-row"><span class="horario-dia">Quarta</span><span class="horario-aberto">09h–19h</span></div>
+            <div class="horario-row"><span class="horario-dia">Quinta</span><span class="horario-aberto">09h–20h</span></div>
+            <div class="horario-row"><span class="horario-dia">Sexta</span><span class="horario-aberto">09h–20h</span></div>
+            <div class="horario-row"><span class="horario-dia">Sábado</span><span class="horario-aberto">08h–18h</span></div>
+            <div class="horario-row"><span class="horario-dia">Domingo</span><span style="color:var(--text2);font-size:11px;font-family:var(--tag-font)">FECHADO</span></div>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://instagram.com" target="_blank">
+            <div class="social-btn"><span>📷</span> Instagram</div>
+          </a>
+          <a href="https://wa.me/5551999999999" target="_blank">
+            <div class="social-btn"><span>💬</span> WhatsApp</div>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="mapa-container">
+          <div class="mapa-placeholder">
+            <div style="font-size:36px">🗺</div>
+            <p>Substitua pelo embed do Google Maps:</p>
+            <code>&lt;iframe src="maps.google.com/embed?q=SuaBarbearia"&gt;</code>
+            <p style="margin-top:8px">Google Maps → Compartilhar → Incorporar → Copiar HTML</p>
+          </div>
+        </div>
+        <a href="https://wa.me/5551999999999?text=Olá!%20Quero%20agendar%20um%20horário." target="_blank" style="display:block;margin-top:16px;">
+          <button class="btn-agendar" style="width:100%;font-size:14px;padding:16px;border-radius:6px;">
+            📅 Agendar pelo WhatsApp
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">BarberCO</div>
+    <div class="footer-copy"> © 2026 Enzo Lemes C., RS · Todos os direitos reservados </div>  
+    <!-- <div class="footer-copy" style="color:var(--accent)">Feito por <a href="https://www.instagram.com/enzo_lemes_c/" style="color:inherit">Enzo Lemes</a></div> -->
+  </footer>
+</section>
+
+</body>
+</html>
